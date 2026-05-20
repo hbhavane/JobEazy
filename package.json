@@ -1,0 +1,18 @@
+{
+  "name": "jobeazy-extension",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/styles/tailwind.css -o ./src/styles/tailwind.output.css --minify",
+    "build:vendor": "cp ./node_modules/xlsx/dist/xlsx.full.min.js ./src/assets/xlsx.full.min.js",
+    "build": "npm run build:css && npm run build:vendor",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "xlsx": "0.18.5"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.7"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "JobEazy",
+  "version": "1.0.0",
+  "description": "Lightweight local-first job tracker for saving jobs while browsing.",
+  "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "JobEazy",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "utils/content-helpers.js",
+        "extractors/jsonld.js",
+        "extractors/sites.js",
+        "extractors/generic.js",
+        "extractors/index.js",
+        "content/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobEazy</title>
+    <link rel="stylesheet" href="../styles/tailwind.output.css" />
+  </head>
+  <body class="w-[360px]">
+    <main class="space-y-4 p-4">
+      <header class="flex items-center justify-between">
+        <h1 class="text-lg font-semibold">JobEazy</h1>
+        <button id="openDashboard" class="btn btn-secondary text-xs">Dashboard</button>
+      </header>
+
+      <form id="jobForm" class="space-y-3">
+        <input id="title" class="input" placeholder="Job title" required />
+        <input id="company" class="input" placeholder="Company" />
+        <input id="location" class="input" placeholder="Location" />
+        <input id="url" class="input" placeholder="URL" type="url" required />
+
+        <div class="grid grid-cols-2 gap-2">
+          <select id="status" class="input"></select>
+          <button id="saveBtn" type="submit" class="btn btn-primary">Save</button>
+        </div>
+
+        <textarea id="notes" class="input min-h-20" placeholder="Notes"></textarea>
+      </form>
+
+      <p id="toast" class="hidden rounded-md bg-emerald-600 px-3 py-2 text-xs text-white"></p>
+    </main>
+
+    <script type="module" src="./popup.js"></script>
+  </body>
+</html>
