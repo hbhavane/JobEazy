@@ -12,9 +12,9 @@
         <h1 class="text-2xl font-semibold">JobEazy Dashboard</h1>
         <div class="flex flex-wrap gap-2">
           <button id="exportCsv" class="btn btn-secondary">Export CSV</button>
-          <button id="exportXlsx" class="btn btn-primary">Export XLSX</button>
         </div>
       </header>
+      <p id="exportMessage" class="hidden rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-sm"></p>
 
       <section class="grid gap-2 sm:grid-cols-2">
         <input id="search" class="input" placeholder="Search jobs" />
@@ -39,8 +39,6 @@
         </table>
       </section>
     </main>
-
-    <script src="../assets/xlsx.full.min.js"></script>
     <script type="module" src="./dashboard.js"></script>
   </body>
 </html>

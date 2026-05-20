@@ -1,9 +1,11 @@
 import { DEFAULT_STATUS, STATUSES } from "../utils/constants.js";
-import { deleteJob, exportJobs, getJobs, updateJob } from "../storage/storage.js";
+import { deleteJob, getJobs, updateJob } from "../storage/storage.js";
+import { exportJobsToCSV } from "../utils/exportCSV.js";
 
 const rows = document.querySelector("#rows");
 const searchInput = document.querySelector("#search");
 const statusFilter = document.querySelector("#statusFilter");
+const exportMessage = document.querySelector("#exportMessage");
 
 let allJobs = [];
 
@@ -14,6 +16,13 @@ const escapeHtml = (value) =>
     .replaceAll(">", "&gt;")
     .replaceAll("\"", "&quot;")
     .replaceAll("'", "&#39;");
+
+const showExportMessage = (message, isError = false) => {
+  exportMessage.textContent = message;
+  exportMessage.classList.remove("hidden", "border-emerald-600", "text-emerald-300", "border-rose-600", "text-rose-300");
+  exportMessage.classList.add(isError ? "border-rose-600" : "border-emerald-600");
+  exportMessage.classList.add(isError ? "text-rose-300" : "text-emerald-300");
+};
 
 const getFilteredJobs = () => {
   const query = searchInput.value.trim().toLowerCase();
@@ -100,8 +109,10 @@ rows.addEventListener("input", async (event) => {
 searchInput.addEventListener("input", render);
 statusFilter.addEventListener("change", render);
 
-document.querySelector("#exportCsv").addEventListener("click", () => exportJobs("csv"));
-document.querySelector("#exportXlsx").addEventListener("click", () => exportJobs("xlsx"));
+document.querySelector("#exportCsv").addEventListener("click", async () => {
+  const result = await exportJobsToCSV();
+  showExportMessage(result.message, !result.ok);
+});
 
 const init = async () => {
   statusFilter.innerHTML = `<option value="">All Statuses</option>${STATUSES.map(

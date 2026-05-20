@@ -1,5 +1,4 @@
 import { STORAGE_KEY } from "../utils/constants.js";
-import { jobsToCsv, jobsToRows } from "../utils/export.js";
 import { normalizeJob, nowIso } from "../utils/job-model.js";
 
 const getLocal = (key) =>
@@ -63,30 +62,4 @@ export const deleteJob = async (id) => {
   const jobs = await getJobs();
   const next = jobs.filter((job) => job.id !== id);
   await setLocal(next);
-};
-
-export const exportJobs = async (format = "csv") => {
-  const jobs = await getJobs();
-  const stamp = new Date().toISOString().slice(0, 10);
-
-  if (format === "xlsx") {
-    const rows = jobsToRows(jobs);
-    const worksheet = globalThis.XLSX.utils.json_to_sheet(rows);
-    const workbook = globalThis.XLSX.utils.book_new();
-    globalThis.XLSX.utils.book_append_sheet(workbook, worksheet, "Jobs");
-    globalThis.XLSX.writeFile(workbook, `jobeazy-jobs-${stamp}.xlsx`);
-    return;
-  }
-
-  const csv = jobsToCsv(jobs);
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = `jobeazy-jobs-${stamp}.csv`;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  URL.revokeObjectURL(url);
 };
