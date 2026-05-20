@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobEazy Dashboard</title>
+    <link rel="stylesheet" href="../styles/tailwind.output.css" />
+  </head>
+  <body>
+    <main class="mx-auto max-w-7xl space-y-4 p-4">
+      <header class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <h1 class="text-2xl font-semibold">JobEazy Dashboard</h1>
+        <div class="flex flex-wrap gap-2">
+          <button id="exportCsv" class="btn btn-secondary">Export CSV</button>
+        </div>
+      </header>
+      <p id="exportMessage" class="hidden rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-sm"></p>
+
+      <section class="grid gap-2 sm:grid-cols-2">
+        <input id="search" class="input" placeholder="Search jobs" />
+        <select id="statusFilter" class="input"></select>
+      </section>
+
+      <section class="overflow-auto rounded-lg border border-slate-800">
+        <table class="min-w-full text-left text-sm">
+          <thead class="bg-slate-900 text-slate-300">
+            <tr>
+              <th class="px-3 py-2">Title</th>
+              <th class="px-3 py-2">Company</th>
+              <th class="px-3 py-2">Location</th>
+              <th class="px-3 py-2">Source</th>
+              <th class="px-3 py-2">Status</th>
+              <th class="px-3 py-2">Notes</th>
+              <th class="px-3 py-2">Updated</th>
+              <th class="px-3 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </section>
+    </main>
+    <script type="module" src="./dashboard.js"></script>
+  </body>
+</html>
