@@ -1,10 +1,12 @@
 (() => {
   const root = (globalThis.JobEazy = globalThis.JobEazy || {});
 
+  const matchesHost = (hostname, domain) => hostname === domain || hostname.endsWith(`.${domain}`);
+
   const pickExtractor = (hostname) => {
-    if (hostname.includes("linkedin.com")) return root.extractLinkedIn;
-    if (hostname.includes("greenhouse.io")) return root.extractGreenhouse;
-    if (hostname.includes("lever.co")) return root.extractLever;
+    if (matchesHost(hostname, "linkedin.com")) return root.extractLinkedIn;
+    if (matchesHost(hostname, "greenhouse.io")) return root.extractGreenhouse;
+    if (matchesHost(hostname, "lever.co")) return root.extractLever;
     return null;
   };
 
