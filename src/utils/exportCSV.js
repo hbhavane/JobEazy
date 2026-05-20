@@ -59,7 +59,8 @@ export const exportJobsToCSV = async () => {
     const csvString = convertJobsToCSV(jobs);
     downloadCSV(csvString);
     return { ok: true, message: "CSV exported" };
-  } catch {
+  } catch (error) {
+    console.error("CSV export failed:", error);
     return { ok: false, message: "Unable to export jobs right now" };
   }
 };
